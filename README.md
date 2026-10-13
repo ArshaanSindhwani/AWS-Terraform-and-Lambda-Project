@@ -1,4 +1,4 @@
-# Genomics England Terraform assessment
+# AWS Terraform and Lambda Assessment
 
 I built this repository for the AWS and Terraform assessment. It creates two S3 buckets and a Lambda function that removes EXIF metadata from `.jpg` files uploaded to Bucket A, then saves each file to Bucket B with the same key. It also creates the two IAM users and gives each access to the bucket described in the brief.
 
