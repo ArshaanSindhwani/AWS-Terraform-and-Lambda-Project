@@ -10,3 +10,6 @@ __pycache__/
 terraform/.build/
 lambda/PIL/
 lambda/*.dist-info/
+.venv/
+__pycache__/
+.pytest_cache/

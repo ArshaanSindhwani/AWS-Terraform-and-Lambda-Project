@@ -59,10 +59,12 @@ def strip_exif(jpeg):
             # bytes and restart markers, then resume parsing at the next real
             # marker so EXIF segments between progressive scans are removed too.
             scan_position = position
-            while scan_position < len(jpeg):
-                if jpeg[scan_position] != 0xFF:
-                    scan_position += 1
-                    continue
+            while True:
+                scan_position = jpeg.find(b"\xff", scan_position)
+                if scan_position == -1:
+                    output.extend(jpeg[position:])
+                    position = len(jpeg)
+                    break
 
                 next_marker = scan_position + 1
                 while next_marker < len(jpeg) and jpeg[next_marker] == 0xFF:
@@ -77,9 +79,6 @@ def strip_exif(jpeg):
 
                 output.extend(jpeg[position:scan_position])
                 position = scan_position
-                break
-            else:
-                output.extend(jpeg[position:])
                 break
 
     return bytes(output)
